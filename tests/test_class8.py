@@ -63,7 +63,7 @@ def test_class8_ex1():
 
 def test_class8_ex2():
     base_path = "../class8/exercises/exercise2"
-    cmd_list = ["ansible-playbook", "exercise2.yml", "-i", "./ansible-hosts.ini"] 
+    cmd_list = ["ansible-playbook", "exercise2.yml", "-i", "./ansible-hosts.ini"]
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     std_err = remove_ansible_warnings(std_err)
     assert std_err == ""
@@ -104,6 +104,7 @@ def test_class8_ex5():
     assert re.search(r"nxos1.*ok=8", std_out)
     assert re.search(r"nxos2.*ok=7", std_out)
 
+
 def test_class8_ex6a():
     """Exercise 6a doesn't actually fail."""
     base_path = "../class8/exercises/exercise6"
@@ -113,6 +114,7 @@ def test_class8_ex6a():
     assert std_err == ""
     assert return_code == 0
     assert re.search(r"msg.*show_lldp", std_out)
+
 
 def test_class8_ex6f():
     """Exercise 6f doesn't actually fail."""
@@ -177,7 +179,12 @@ def test_class8_ex7a():
 def test_class8_ex7b():
     """Should fail when no vault password is provided."""
     base_path = "../class8/exercises/exercise7"
-    cmd_list = ["ansible-playbook", "exercise7.yml", "--vault-password-file", ".my_vault"]
+    cmd_list = [
+        "ansible-playbook",
+        "exercise7.yml",
+        "--vault-password-file",
+        ".my_vault",
+    ]
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     std_err = remove_ansible_warnings(std_err)
     assert return_code == 0
